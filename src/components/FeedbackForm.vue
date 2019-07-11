@@ -24,7 +24,7 @@
 
     <div v-if="useful === false">
 
-      <div class="govuk-form-group">
+      <div class="govuk-form-group" ref="reasonQuestion">
         <fieldset class="govuk-fieldset">
           <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
             Why isn’t this page useful?
