@@ -25,9 +25,7 @@
     },
     methods: {
       saveFeedback(feedback) {
-        setTimeout(() => {
-          this.submitted = true;
-        }, 500);
+        this.submitted = true;
       }
     },
   }
