@@ -1,0 +1,10 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /feedback/{docID} {
+      // Allow new documents to be created
+      // Disallow read, update and delete of existing documents
+      allow create;
+    }
+  }
+}
