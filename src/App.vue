@@ -13,6 +13,7 @@
 
 <script>
   import FeedbackForm from '@/components/FeedbackForm';
+  import {firestore} from '@/firebase';
 
   export default {
     components: {
@@ -24,9 +25,19 @@
       };
     },
     methods: {
-      saveFeedback(feedback) {
+      async saveToFirestore(feedback) {
+        const document = firestore.collection('feedback').doc();
+        await document.set(feedback);
+      },
+      async saveFeedback(feedback) {
+        feedback.url = this.getPageUrl();
+        await this.saveToFirestore(feedback);
         this.submitted = true;
-      }
+      },
+      getPageUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('url');
+      },
     },
   }
 </script>

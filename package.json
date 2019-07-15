@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "core-js": "^2.6.5",
+    "firebase": "^6.3.0",
     "govuk-frontend": "^2.13.0",
     "vue": "^2.6.10"
   },
@@ -24,6 +25,7 @@
     "babel-jest": "^23.6.0",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "firebase-mock": "^2.2.10",
     "sass": "^1.22.3",
     "sass-loader": "^7.1.0",
     "vue-template-compiler": "^2.6.10"
