@@ -57,39 +57,39 @@
 
 <script>
   export default {
-      data() {
-        return {
-          useful: null,
-          reasonOptions: [
-            'It isn’t relevant to my situation',
-            'It doesn’t have enough detail',
-            'I can’t work out what I should do next',
-            'I don’t understand',
-          ],
-          reason: null,
-          comments: '',
+    data() {
+      return {
+        useful: null,
+        reasonOptions: [
+          'It isn’t relevant to my situation',
+          'It doesn’t have enough detail',
+          'I can’t work out what I should do next',
+          'I don’t understand',
+        ],
+        reason: null,
+        comments: '',
+      };
+    },
+    methods: {
+      submit() {
+        const feedback = {
+          useful: this.useful,
         };
-      },
-      methods: {
-        submit() {
-          const feedback = {
-            useful: this.useful,
-          };
 
-          if (this.useful === false) {
-            feedback.reason = this.reason;
-            feedback.comments = this.comments;
-          }
-
-          this.$emit('submit', feedback);
+        if (this.useful === false) {
+          feedback.reason = this.reason;
+          feedback.comments = this.comments;
         }
-      },
-      watch: {
-        useful(value) {
-          if (value === true) {
-            this.submit();
-          }
+
+        this.$emit('submit', feedback);
+      }
+    },
+    watch: {
+      useful(value) {
+        if (value === true) {
+          this.submit();
         }
       }
+    },
   }
 </script>
