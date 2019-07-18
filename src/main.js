@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import setIframeHeight from '@/mixins/setIframeHeight';
+import 'url-search-params-polyfill';
 
 Vue.config.productionTip = false;
 

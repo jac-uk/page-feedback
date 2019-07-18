@@ -12,6 +12,7 @@
     "core-js": "^2.6.5",
     "firebase": "^6.3.0",
     "govuk-frontend": "^2.13.0",
+    "url-search-params-polyfill": "^7.0.0",
     "vue": "^2.6.10"
   },
   "devDependencies": {
