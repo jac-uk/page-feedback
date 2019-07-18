@@ -15,7 +15,6 @@
 
 <script>
   import FeedbackForm from '@/components/FeedbackForm';
-  import {firestore} from '@/firebase';
 
   export default {
     components: {
@@ -28,6 +27,7 @@
     },
     methods: {
       async saveToFirestore(feedback) {
+        const {firestore} = await import(/* webpackChunkName: "firebase" */ '@/firebase');
         const document = firestore.collection('feedback').doc();
         await document.set(feedback);
       },
