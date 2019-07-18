@@ -27,9 +27,13 @@
     },
     methods: {
       async saveToFirestore(feedback) {
-        const {firestore} = await import(/* webpackChunkName: "firebase" */ '@/firebase');
+        const {firestore, default: firebase} = await import(/* webpackChunkName: "firebase" */ '@/firebase');
+        const saveData = {
+          received: firebase.firestore.FieldValue.serverTimestamp(),
+          ...feedback,
+        };
         const document = firestore.collection('feedback').doc();
-        await document.set(feedback);
+        await document.set(saveData);
       },
       async saveFeedback(feedback) {
         feedback.url = this.getPageUrl();

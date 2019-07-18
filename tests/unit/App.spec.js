@@ -1,13 +1,18 @@
 import {shallowMount} from '@vue/test-utils';
 import App from '@/App';
 import FeedbackForm from '@/components/FeedbackForm';
-import {firestore} from '@/firebase';
+import firebase, {firestore} from '@/firebase';
 
 jest.mock('@/firebase', () => {
-  const firebase = require('firebase-mock');
-  const firestore = firebase.MockFirebaseSdk().firestore();
+  const firebaseMock = require('firebase-mock');
+  const firebase = firebaseMock.MockFirebaseSdk();
+  const firestore = firebase.firestore();
   firestore.autoFlush();
-  return {firestore};
+  return {
+    __esModule: true,
+    default: firebase,
+    firestore
+  };
 });
 
 const deleteCollection = async (collectionPath) => {
@@ -173,12 +178,16 @@ describe('App', () => {
           ]
         ];
 
-        describe('sets the document data to the supplied `feedback` object', () => {
+        describe('sets the document data to the supplied `feedback` object, with an added server timestamp field called' +
+          ' `received`', () => {
           it.each(mockFeedback)('mock payload: %s', async (name, feedback) => {
             await wrapper.vm.saveToFirestore(feedback);
             const records = await firestore.collection('feedback').get();
             const record = records.docs[0];
-            expect(record.data()).toEqual(feedback);
+            expect(record.data()).toEqual({
+              received: firebase.firestore.FieldValue.serverTimestamp(),
+              ...feedback,
+            });
           });
         });
       });
